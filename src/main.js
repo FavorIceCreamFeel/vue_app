@@ -8,7 +8,7 @@ import './assets/css/global.css'
 // 导入axios
 import axios from 'axios'
 // 配置请求根路径
-axios.defaults.baseURL = 'http://127.0.0.1:8888/api/'
+axios.defaults.baseURL = 'http://www.liulongbin.top:3005/api/'
 // 通过axios拦截器添加 token 验证
 axios.interceptors.request.use(config => {
   // 这样请求头中就会添加属性  Authorization(key) 值为 token(value) = window.sessionStorage.getItem('token')

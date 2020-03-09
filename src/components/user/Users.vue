@@ -14,13 +14,14 @@
                 <!-- //el-col 是 一个块 span的属性值代表着每一个块所占大小,总计可以是12/24 -->
                 <el-col :span="8">
                     <!-- 搜索框 -->
-                    <el-input placeholder="请输入内容" class="input-with-select">
+                    <!-- clearable 清除搜索框 点击后可以出发事件 @clear 也可以添加回车触发事件 keyup-->
+                    <el-input placeholder="请输入内容"  @keyup="getUserList" clearable @clear="getUserList" @click="getUserList">
                         <el-button slot="append" icon="el-icon-search"></el-button>
                     </el-input>
                 </el-col>
                 <!-- 按钮 -->
                 <el-col :span="4">
-                    <el-button type="primary">添加用户</el-button>
+                    <el-button type="primary" @click="dialogVisible= true">添加用户</el-button>
                 </el-col>
             </el-row>
             <!-- 用户列表区域  data的值是数据源中的对象-->
@@ -67,6 +68,33 @@
 
             </el-pagination>
         </el-card>
+
+        <!-- 添加用户对话框 :visible.sync显示与隐藏-->
+        <el-dialog
+          title="添加用户"
+          :visible.sync="dialogVisible"
+          width="50%" >
+          <!-- 添加用户输入框 -->
+          <el-form ref="addformRef" :model="addform" :rules="addformRole"  label-width="80px">
+            <el-form-item label="账户：" prop="usersname" autofocus>
+              <el-input v-model="addform.usersname"></el-input>
+            </el-form-item>
+            <el-form-item label="密码：" prop="pwd" autofocus>
+              <el-input show-password v-model="addform.pwd"></el-input>
+            </el-form-item>
+            <el-form-item label="邮箱：" prop="email">
+              <el-input v-model="addform.email"></el-input>
+            </el-form-item>
+            <el-form-item label="手机号：" prop="mobile">
+              <el-input v-model="addform.mobile"></el-input>
+            </el-form-item>
+          </el-form>
+
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="dialogVisible = false">取 消</el-button>
+            <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+          </span>
+        </el-dialog>
     </div>
 </template>
 
@@ -76,6 +104,7 @@ export default {
     return {
       // 获取用户列表的参数对象
       queryInfo: {
+        // 搜索关键字
         query: '',
         // 当前页
         pagenum: 1,
@@ -112,7 +141,45 @@ export default {
         create_time: '2014-11-09T20:',
         mg_state: false,
         role_name: '管理员'
-      }]
+      }],
+      // 对话框展示
+      dialogVisible: false,
+      addform: {
+        usersname: '',
+        pwd: '',
+        email: '',
+        mobile: ''
+      },
+      addformRole: {
+        usersname: [
+          {
+            required: true,
+            message: '请输入账号',
+            trigger: 'blur'
+          },
+          { min: 3, max: 10, message: '3~10', trigger: 'blur' }],
+        pwd: [
+          {
+            required: true,
+            message: '请输入密码',
+            trigger: 'blur'
+          },
+          { min: 3, max: 10, message: '3~10', trigger: 'blur' }],
+        email: [
+          {
+            required: true,
+            message: '请输入邮箱',
+            trigger: 'blur'
+          },
+          { min: 3, max: 10, message: '3~10', trigger: 'blur' }],
+        mobile: [
+          {
+            required: true,
+            message: '请输入手机号',
+            trigger: 'blur'
+          },
+          { min: 3, max: 10, message: '3~10', trigger: 'blur' }]
+      }
     }
   },
   created () {

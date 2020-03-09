@@ -21,7 +21,7 @@ import {
   Row,
   Col,
   Select, Option, Table, TableColumn,
-  Switch, Tooltip, Pagination
+  Switch, Tooltip, Pagination, Dialog
 } from 'element-ui'
 Vue.use(Button)
 Vue.use(Form)
@@ -47,5 +47,6 @@ Vue.use(TableColumn)
 Vue.use(Switch)
 Vue.use(Tooltip)
 Vue.use(Pagination)
+Vue.use(Dialog)
 // 把 弹窗组件 提示挂载到原型上，使用 this.$message 可以访问
 Vue.prototype.$message = Message

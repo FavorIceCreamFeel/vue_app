@@ -5,7 +5,7 @@
            <div class="avater_box">
                <img src="../assets/logo.png" alt="图片">
            </div>
-           <!-- 登录表单区域 ref就代表着表单本身 rules对象 简单的校验，可以使用正则表达式， loginForm 对象 绑定的数据 -->
+           <!-- 登录表单区域 ref=》就代表着表单本身， rules对象 =》简单的校验，可以使用正则表达式， loginForm对象=》绑定的数据 -->
            <el-form ref="form" :rules="loginFormRules"  :model="loginForm" label-width="90px" class="login_form">
                <!-- 用户名 -->
                 <el-form-item label="账户：" prop="name">
